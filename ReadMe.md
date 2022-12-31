@@ -19,3 +19,13 @@ Make sure to generate a random complex AUTH_SECRET key.
 Use this command
 npm run seed
 To seed the database before testing the app
+
+Keep in mind that whenever you run this command, the database will be reinitialized. I.e: All previous entries will be deleted.
+
+---
+
+Note 4:
+Instead of adding customer_name field to Order model
+I referenced the User model
+And the user model contains the customer name
+Otherwise, it would be a redundancy

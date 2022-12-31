@@ -15,7 +15,7 @@ module.exports = (passport) => {
     new JwtStrategy(
       normal_request_authentication_options,
       (jwt_payload, done) => {
-        User.findById(jwt_payload.id).then((user) => {
+        User.findById(jwt_payload.user_id).then((user) => {
           if (user) {
             //error = null
             return done(null, user);

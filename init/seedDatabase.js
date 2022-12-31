@@ -2,26 +2,37 @@ const mongoose = require("mongoose");
 const User = require("../Models/User");
 const Region = require("../Models/Region");
 const Product = require("../Models/Product");
-const Order = require("../Models/Order");
+const userServicesHelpers = require("../helpers/services/userServices.helpers");
 
 const seedUsers = async () => {
   const users = [
     {
+      name: "name1",
       email: "user1@example.com",
       password: "password1",
       type: "customer",
     },
     {
+      name: "name2",
       email: "user2@example.com",
       password: "password2",
       type: "admin",
     },
     {
+      name: "name3",
       email: "user3@example.com",
       password: "password3",
       type: "customer_admin",
     },
   ];
+  // Hashing passwords
+  for (let i = 0; i < users.length; i++) {
+    const user = users[i];
+    const { password } = user;
+    const salt = await userServicesHelpers.genSalt();
+    const hash = await userServicesHelpers.genHash(salt, password);
+    user.password = hash;
+  }
 
   User.deleteMany({}, (err) => {
     if (err) {
@@ -100,44 +111,9 @@ const seedProducts = async () => {
     }
   });
 };
-const seedOrders = async () => {
-  const orders = [
-    {
-      customer_name: "User 1",
-      shipping_address: "123 Main St",
-      order_total: 50,
-      paid_at: new Date(),
-    },
-    {
-      customer_name: "User 2",
-      shipping_address: "456 Main St",
-      order_total: 100,
-      paid_at: new Date(),
-    },
-    {
-      customer_name: "User 3",
-      shipping_address: "789 Main St",
-      order_total: 75,
-      paid_at: new Date(),
-    },
-  ];
 
-  Order.deleteMany({}, (err) => {
-    if (err) {
-      console.error(err);
-    } else {
-      Order.insertMany(orders, (err, docs) => {
-        if (err) {
-          console.error(err);
-        } else {
-          console.log(`${docs.length} orders created`);
-        }
-      });
-    }
-  });
-};
 const seedDatabase = async () => {
-  await Promise.all([seedUsers(), seedRegions(), seedProducts(), seedOrders()]);
+  await Promise.all([seedUsers(), seedRegions(), seedProducts()]);
 };
 
 mongoose.connect("mongodb://localhost:27017/ecommerce", {

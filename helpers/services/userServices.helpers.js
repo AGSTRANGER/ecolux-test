@@ -46,7 +46,7 @@ const verifyPassword = async (
     //Sign Token
     /**First we need to create a jwt payload, you can put whatever userinformation here except for the pwd */
     const payload = {
-      id: user_id,
+      user_id: user_id,
       email: email,
     };
 
