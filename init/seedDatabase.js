@@ -4,34 +4,21 @@ const Region = require("../Models/Region");
 const Product = require("../Models/Product");
 const Order = require("../Models/Order");
 
-mongoose.connect("mongodb://localhost:27017/ecommerce", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-const db = mongoose.connection;
-
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", () => {
-  console.log("Connected to MongoDB");
-
+const seedUsers = async () => {
   const users = [
     {
       email: "user1@example.com",
       password: "password1",
-      name: "User 1",
       type: "customer",
     },
     {
       email: "user2@example.com",
       password: "password2",
-      name: "User 2",
       type: "admin",
     },
     {
       email: "user3@example.com",
       password: "password3",
-      name: "User 3",
       type: "customer_admin",
     },
   ];
@@ -49,7 +36,8 @@ db.once("open", () => {
       });
     }
   });
-
+};
+const seedRegions = async () => {
   const regions = [
     { title: "Vietnam", country: "VN", currency: "VND", tax: 10 },
     { title: "Singapore", country: "SG", currency: "SGD", tax: 7 },
@@ -69,7 +57,8 @@ db.once("open", () => {
       });
     }
   });
-
+};
+const seedProducts = async () => {
   const products = [
     {
       title: "T-Shirt",
@@ -110,7 +99,8 @@ db.once("open", () => {
       });
     }
   });
-
+};
+const seedOrders = async () => {
   const orders = [
     {
       customer_name: "User 1",
@@ -142,8 +132,20 @@ db.once("open", () => {
         } else {
           console.log(`${docs.length} orders created`);
         }
-        db.close();
       });
     }
   });
+};
+const seedDatabase = async () => {
+  await Promise.all([seedUsers(), seedRegions(), seedProducts(), seedOrders()]);
+};
+
+mongoose.connect("mongodb://localhost:27017/ecommerce", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
+
+const db = mongoose.connection;
+
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", seedDatabase);
