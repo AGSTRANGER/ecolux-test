@@ -1,0 +1,8 @@
+TODO #1:
+Implement this:
+const mongoURI = require("./config/db-keys").mongoURI;
+
+TODO #2:
+Implement passport
+and uncomment this in server.js
+// require("./config/passport-config")(passport);
