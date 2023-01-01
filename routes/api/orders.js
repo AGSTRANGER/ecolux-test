@@ -8,12 +8,12 @@ const orderServices = require("../../services/orderServices");
 // @access Private
 
 router.post(
-  "/order",
+  "/",
   passport.authenticate("normal-request-authentication-strategy", {
     session: false,
   }),
   async (req, res) => {
-    const user_id = req.query.user_id;
+    const user_id = req.user._id;
     const { shipping_address, items } = req.body;
     orderServices
       .createOrder(user_id, shipping_address, items)
@@ -54,7 +54,7 @@ router.post(
 // @access Private
 
 router.get(
-  "/orders/:id",
+  "/:id",
   passport.authenticate("normal-request-authentication-strategy", {
     session: false,
   }),
@@ -77,19 +77,23 @@ router.get(
 // @access Private
 
 router.patch(
-  "/orders/:id",
+  "/:id",
   passport.authenticate("normal-request-authentication-strategy", {
     session: false,
   }),
   (req, res) => {
-    const user_id = req.query.user_id;
+    const user_id = req.user._id;
+    console.log("🚀 ~ file: orders.js:86 ~ user_id", user_id);
     const { order_id, shipping_address, items } = req.body;
-    updateAnOrder
-      .createOrder(order_id, user_id, shipping_address, items)
+    console.log("🚀 ~ file: orders.js:87 ~ items", items);
+    console.log("🚀 ~ file: orders.js:87 ~ shipping_address", shipping_address);
+    console.log("🚀 ~ file: orders.js:87 ~ order_id", order_id);
+    orderServices
+      .updateAnOrder(order_id, user_id, shipping_address, items)
       .then((result) => {
         res.status(200).json({
           message: "Order update was successful",
-          updated_order: result,
+          result,
         });
       })
       .catch((error) => {
@@ -101,7 +105,7 @@ router.patch(
 
 // Delete an order
 router.delete(
-  "/orders/:id",
+  "/:id",
   passport.authenticate("normal-request-authentication-strategy", {
     session: false,
   }),
