@@ -18,7 +18,10 @@ router.post(
     orderServices
       .createOrder(user_id, shipping_address, items)
       .then((result) => {
-        res.status(200).json({ message: "Order creation was successful" });
+        res.status(200).json({
+          message: "Order creation was successful",
+          result,
+        });
       })
       .catch((error) => {
         console.log("🚀 ~ file: orders.js:24 ~ error", error);
@@ -28,23 +31,23 @@ router.post(
 );
 
 // @route  GET api/orders
-// @desc   Get all orders
+// @desc   Get all orders / Only accessible by admins
 // @access Private
 
-router.get(
-  "/orders",
-  passport.authenticate("normal-request-authentication-strategy", {
-    session: false,
-  }),
-  async (req, res) => {
-    try {
-      const orders = await Order.find({ customer_id: req.params.userId });
-      res.send(orders);
-    } catch (error) {
-      res.status(500).send(error);
-    }
-  }
-);
+// router.get(
+//   "/orders",
+//   passport.authenticate("normal-request-authentication-strategy", {
+//     session: false,
+//   }),
+//   async (req, res) => {
+//     try {
+//       const orders = await Order.find({ customer_id: req.params.userId });
+//       res.send(orders);
+//     } catch (error) {
+//       res.status(500).send(error);
+//     }
+//   }
+// );
 
 // @route  Get api/orders
 // @desc   Get a specific order by ID
@@ -78,35 +81,21 @@ router.patch(
   passport.authenticate("normal-request-authentication-strategy", {
     session: false,
   }),
-  async (req, res) => {
-    const updates = Object.keys(req.body);
-    const allowedUpdates = [
-      "customer_name",
-      "shipping_address",
-      "order_total",
-      "paid_at",
-    ];
-    const isValidOperation = updates.every((update) =>
-      allowedUpdates.includes(update)
-    );
-
-    if (!isValidOperation) {
-      return res.status(400).send({ error: "Invalid update(s)" });
-    }
-
-    try {
-      const order = await Order.findByIdAndUpdate(req.params.id, req.body, {
-        new: true,
-        runValidators: true,
+  (req, res) => {
+    const user_id = req.query.user_id;
+    const { order_id, shipping_address, items } = req.body;
+    updateAnOrder
+      .createOrder(order_id, user_id, shipping_address, items)
+      .then((result) => {
+        res.status(200).json({
+          message: "Order update was successful",
+          updated_order: result,
+        });
+      })
+      .catch((error) => {
+        console.log("🚀 ~ file: orders.js:24 ~ error", error);
+        res.status(500).send("Order update was unsuccessful");
       });
-      if (!order) {
-        res.status(404).send();
-      } else {
-        res.send(order);
-      }
-    } catch (error) {
-      res.status(400).send(error);
-    }
   }
 );
 
