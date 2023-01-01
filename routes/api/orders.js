@@ -30,26 +30,7 @@ router.post(
   }
 );
 
-// @route  GET api/orders
-// @desc   Get all orders / Only accessible by admins
-// @access Private
-
-// router.get(
-//   "/orders",
-//   passport.authenticate("normal-request-authentication-strategy", {
-//     session: false,
-//   }),
-//   async (req, res) => {
-//     try {
-//       const orders = await Order.find({ customer_id: req.params.userId });
-//       res.send(orders);
-//     } catch (error) {
-//       res.status(500).send(error);
-//     }
-//   }
-// );
-
-// @route  Get api/orders
+// @route  Get api/orders/:id
 // @desc   Get a specific order by ID
 // @access Private
 
@@ -72,7 +53,7 @@ router.get(
   }
 );
 
-// @route  patch api/orders
+// @route  patch api/orders/:id
 // @desc   Update an order
 // @access Private
 
@@ -83,11 +64,10 @@ router.patch(
   }),
   (req, res) => {
     const user_id = req.user._id;
+    const order_id = req.params.id;
+    console.log("🚀 ~ file: orders.js:68 ~ order_id", order_id);
     console.log("🚀 ~ file: orders.js:86 ~ user_id", user_id);
-    const { order_id, shipping_address, items } = req.body;
-    console.log("🚀 ~ file: orders.js:87 ~ items", items);
-    console.log("🚀 ~ file: orders.js:87 ~ shipping_address", shipping_address);
-    console.log("🚀 ~ file: orders.js:87 ~ order_id", order_id);
+    const { shipping_address, items } = req.body;
     orderServices
       .updateAnOrder(order_id, user_id, shipping_address, items)
       .then((result) => {

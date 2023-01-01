@@ -75,10 +75,9 @@ You will receive this in the result:
 
 Note 5:
 This is how you can test updating an order
-PATCH http://localhost:5000/api/orders
+PATCH http://localhost:5000/api/orders/:ENTER_EXISTING_ORDER_ID_HERE
 
 {
-"order_id":"ENTER_EXISTING_ORDER_ID_HERE",
 "shipping_address": "ENTER_NEW_SHIPPING_ADDRESS_HERE",
 "items": [
 {
