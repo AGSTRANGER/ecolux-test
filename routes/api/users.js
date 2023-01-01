@@ -7,9 +7,9 @@ const userServices = require("../../services/userServices");
 // @access Public
 
 router.post("/signup", (req, res) => {
-  const { email, password } = req.body;
+  const { name, email, password } = req.body;
   userServices
-    .signupUser(email, password)
+    .signupUser(name, email, password)
     .then((result) => {
       res.status(200).json({ message: "Sign-up was successful" });
     })

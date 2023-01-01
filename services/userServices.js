@@ -1,8 +1,9 @@
 const User = require("../Models/User");
 const userServicesHelpers = require("../helpers/services/userServices.helpers");
 
-const signupUser = async (email, password) => {
+const signupUser = async (name, email, password) => {
   const newUser = new User({
+    name,
     email,
     password,
     type: "customer",
