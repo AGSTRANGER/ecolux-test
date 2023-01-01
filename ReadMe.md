@@ -70,3 +70,54 @@ You will receive this in the result:
 }
 }
 }
+
+---
+
+Note 5:
+This is how you can test updating an order
+PATCH http://localhost:5000/api/orders
+
+{
+"order_id":"ENTER_EXISTING_ORDER_ID_HERE",
+"shipping_address": "ENTER_NEW_SHIPPING_ADDRESS_HERE",
+"items": [
+{
+"_id":"ENTER_EXISTING_ITEM_IN_ORDER_HERE",
+"quantity":12
+},
+{
+"_id":"ENTER_NEW_PRODUCT_ID_HERE",
+"quantity":6
+}
+]
+}
+
+The will return:
+
+{
+"message": "Order update was successful",
+"result": {
+"updated_order": {
+"\_id": "63b16ea23169dbd1a286f738",
+"user": "63b16e7baf15195022e5fbd9",
+"shipping_address": "NEW_SHIPPING_ADDRESS",
+"order_total": 10,
+"items": [
+{
+"product": "UPDATED_EXISTING_ITEM",
+"price": 10,
+"quantity": 12 // New quantity
+},
+{
+"product": "ADDED_NEW_ITEM_TO_ORDER",
+"price": 30,
+"quantity": 6
+}
+],
+"state": "unpaid",
+"createdAt": "2023-01-01T11:29:38.932Z",
+"updatedAt": "2023-01-01T11:36:34.700Z",
+"\_\_v": 1
+}
+}
+}
