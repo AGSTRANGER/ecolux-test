@@ -34,7 +34,7 @@ Otherwise, it would be a redundancy
 
 Note 5:
 This is how you can test creating an order
-http://localhost:5000/api/orders/order
+POST http://localhost:5000/api/orders
 
 body :
 {

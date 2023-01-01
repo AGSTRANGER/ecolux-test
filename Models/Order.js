@@ -22,6 +22,8 @@ const orderSchema = new mongoose.Schema(
     },
     items: [
       {
+        // Prevent Mongoose from adding an _id field since the product will be the _id of the item otherwise there will be redundancy
+        _id: false,
         product: {
           type: Schema.Types.ObjectId,
           ref: "Products",
