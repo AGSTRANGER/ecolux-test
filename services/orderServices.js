@@ -72,10 +72,7 @@ const updateOrder = async (
         (previously_ordered_item) =>
           previously_ordered_item.product.toString() == item_to_update._id
       );
-      console.log(
-        "🚀 ~ file: orderServices.js:56 ~ updateOrder ~ index",
-        index
-      );
+
       const is_this_old_item = index > -1;
       // If the item exists, update its fields
       if (is_this_old_item) {

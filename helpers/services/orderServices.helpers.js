@@ -16,12 +16,7 @@ const checkIfItemsStocksAreStillAvailable = async (ordered_items) => {
       stock: { $gte: quantity },
     };
     const available_item = await Product.findOne(product_search_option).catch(
-      (error) => {
-        console.log(
-          "🚀 ~ file: orderServices.helpers.js:21 ~ checkIfItemsStocksAreStillAvailable ~ error",
-          error
-        );
-      }
+      (error) => {}
     );
     if (!!available_item) {
       result.available_ordered_items_info = [
@@ -53,12 +48,7 @@ const checkIfItemStockIsStillAvailable = async (ordered_item) => {
     stock: { $gte: quantity },
   };
   const available_item = await Product.findOne(product_search_option).catch(
-    (error) => {
-      console.log(
-        "🚀 ~ file: orderServices.helpers.js:21 ~ checkIfItemsStocksAreStillAvailable ~ error",
-        error
-      );
-    }
+    (error) => {}
   );
   if (!!available_item) {
     result.available_ordered_item_info = {

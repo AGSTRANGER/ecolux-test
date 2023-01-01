@@ -24,7 +24,6 @@ router.post(
         });
       })
       .catch((error) => {
-        console.log("🚀 ~ file: orders.js:24 ~ error", error);
         res.status(500).send("Order creation was unsuccessful");
       });
   }
@@ -50,7 +49,6 @@ router.get(
         });
       })
       .catch((error) => {
-        console.log("🚀 ~ file: orders.js:24 ~ error", error);
         res.status(500).send("Order wasn't found");
       });
   }
@@ -68,8 +66,7 @@ router.patch(
   (req, res) => {
     const user_id = req.user._id;
     const order_id = req.params.id;
-    console.log("🚀 ~ file: orders.js:68 ~ order_id", order_id);
-    console.log("🚀 ~ file: orders.js:86 ~ user_id", user_id);
+
     const { shipping_address, items } = req.body;
     orderServices
       .updateOrder(order_id, user_id, shipping_address, items)
@@ -80,13 +77,15 @@ router.patch(
         });
       })
       .catch((error) => {
-        console.log("🚀 ~ file: orders.js:24 ~ error", error);
         res.status(500).send("Order update was unsuccessful");
       });
   }
 );
 
-// Delete an order
+// @route  delete api/orders/:id
+// @desc   Delete an order
+// @access Private
+
 router.delete(
   "/:id",
   passport.authenticate("normal-request-authentication-strategy", {
@@ -103,7 +102,6 @@ router.delete(
         });
       })
       .catch((error) => {
-        console.log("🚀 ~ file: orders.js:24 ~ error", error);
         res.status(500).send("Order wasn't found");
       });
   }
