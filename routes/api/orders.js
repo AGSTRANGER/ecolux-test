@@ -14,13 +14,14 @@ router.post(
   }),
   async (req, res) => {
     const user_id = req.query.user_id;
-    const { shipping_address, order_total } = req.body;
+    const { shipping_address, items } = req.body;
     orderServices
-      .createOrder(user_id, shipping_address, order_total)
+      .createOrder(user_id, shipping_address, items)
       .then((result) => {
         res.status(200).json({ message: "Order creation was successful" });
       })
       .catch((error) => {
+        console.log("🚀 ~ file: orders.js:24 ~ error", error);
         res.status(500).send("Order creation was unsuccessful");
       });
   }

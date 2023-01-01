@@ -20,11 +20,22 @@ const orderSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    products: [
+    items: [
       {
         product: {
           type: Schema.Types.ObjectId,
           ref: "Products",
+        },
+        // As I mentioned for the order_total field
+        // The price of the product may change in the future
+        // So we need to store the price at the time of the order
+        price: {
+          type: Number,
+          required: true,
+        },
+        quantity: {
+          type: Number,
+          required: true,
         },
       },
     ],

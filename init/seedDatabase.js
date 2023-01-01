@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const User = require("../Models/User");
 const Region = require("../Models/Region");
 const Product = require("../Models/Product");
+const Order = require("../Models/Order");
 const userServicesHelpers = require("../helpers/services/userServices.helpers");
 
 const seedUsers = async () => {
@@ -60,6 +61,9 @@ const seedRegions = async () => {
   const created_regions = await Region.insertMany(regions).catch((error) => {
     console.error(error);
   });
+  if (!!created_regions) {
+    console.log(`${created_regions.length} regions created`);
+  }
 
   return created_regions;
 };
@@ -108,11 +112,19 @@ const seedProducts = async (regions) => {
     }
   });
 };
-
+const deletePreviousOrders = async (regions) => {
+  Order.deleteMany({}, (err) => {
+    if (err) {
+      console.error(err);
+    } else {
+    }
+  });
+};
 const seedDatabase = async () => {
   await seedUsers();
   const regions = await seedRegions();
   await seedProducts(regions);
+  await deletePreviousOrders(regions);
   // db.close();
 };
 
