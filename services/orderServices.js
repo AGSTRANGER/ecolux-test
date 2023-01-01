@@ -31,6 +31,17 @@ const createOrder = async (user_id, shipping_address, items) => {
   return result;
 };
 
+const getOrder = async (order_id) => {
+  let result = { order: null };
+  order = await Order.findById(order_id);
+  if (!order) {
+    throw new Error("Order does not exist");
+  } else {
+    result.order = order;
+    return result;
+  }
+};
+
 const updateOrder = async (
   order_id,
   user_id,
@@ -92,9 +103,9 @@ const updateOrder = async (
   return result;
 };
 
-const getOrder = async (order_id) => {
+const deleteOrder = async (order_id) => {
   let result = { order: null };
-  order = await Order.findById(order_id);
+  order = await Order.findByIdAndDelete(order_id);
   if (!order) {
     throw new Error("Order does not exist");
   } else {
@@ -103,12 +114,10 @@ const getOrder = async (order_id) => {
   }
 };
 
-const deleteOrder = async (order_id) => {};
-
 const getOrdersOfUser = async (user_id) => {};
 
 exports.createOrder = createOrder;
-exports.updateOrder = updateOrder;
 exports.getOrder = getOrder;
+exports.updateOrder = updateOrder;
 exports.deleteOrder = deleteOrder;
 exports.getOrdersOfUser = getOrdersOfUser;

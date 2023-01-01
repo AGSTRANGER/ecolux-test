@@ -93,16 +93,19 @@ router.delete(
     session: false,
   }),
   async (req, res) => {
-    try {
-      const order = await Order.findByIdAndDelete(req.params.id);
-      if (!order) {
-        res.status(404).send();
-      } else {
-        res.send(order);
-      }
-    } catch (error) {
-      res.status(500).send(error);
-    }
+    const order_id = req.params.id;
+    orderServices
+      .deleteOrder(order_id)
+      .then((result) => {
+        res.status(200).json({
+          message: "Order was found.",
+          result,
+        });
+      })
+      .catch((error) => {
+        console.log("🚀 ~ file: orders.js:24 ~ error", error);
+        res.status(500).send("Order wasn't found");
+      });
   }
 );
 
