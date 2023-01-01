@@ -6,3 +6,40 @@ TODO #2:
 Implement passport
 and uncomment this in server.js
 // require("./config/passport-config")(passport);
+
+const seedOrders = async () => {
+  const orders = [
+    {
+      customer_name: "User 1",
+      shipping_address: "123 Main St",
+      order_total: 50,
+      paid_at: new Date(),
+    },
+    {
+      customer_name: "User 2",
+      shipping_address: "456 Main St",
+      order_total: 100,
+      paid_at: new Date(),
+    },
+    {
+      customer_name: "User 3",
+      shipping_address: "789 Main St",
+      order_total: 75,
+      paid_at: new Date(),
+    },
+  ];
+
+  Order.deleteMany({}, (err) => {
+    if (err) {
+      console.error(err);
+    } else {
+      Order.insertMany(orders, (err, docs) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log(`${docs.length} orders created`);
+        }
+      });
+    }
+  });
+};

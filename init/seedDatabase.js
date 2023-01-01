@@ -54,22 +54,16 @@ const seedRegions = async () => {
     { title: "Singapore", country: "SG", currency: "SGD", tax: 7 },
     { title: "United States", country: "US", currency: "USD", tax: 5 },
   ];
-
-  Region.deleteMany({}, (err) => {
-    if (err) {
-      console.error(err);
-    } else {
-      Region.insertMany(regions, (err, docs) => {
-        if (err) {
-          console.error(err);
-        } else {
-          console.log(`${docs.length} regions created`);
-        }
-      });
-    }
+  await Region.deleteMany({}).catch((error) => {
+    console.error(error);
   });
+  const created_regions = await Region.insertMany(regions).catch((error) => {
+    console.error(error);
+  });
+
+  return created_regions;
 };
-const seedProducts = async () => {
+const seedProducts = async (regions) => {
   const products = [
     {
       title: "T-Shirt",
@@ -78,6 +72,7 @@ const seedProducts = async () => {
       price: 20,
       sku: "TSHIRT001",
       stock: 100,
+      region: regions[Math.floor(Math.random() * regions.length)]._id,
     },
     {
       title: "Pants",
@@ -86,6 +81,7 @@ const seedProducts = async () => {
       price: 30,
       sku: "PANTS001",
       stock: 50,
+      region: regions[Math.floor(Math.random() * regions.length)]._id,
     },
     {
       title: "Mug",
@@ -94,6 +90,7 @@ const seedProducts = async () => {
       price: 10,
       sku: "MUG001",
       stock: 75,
+      region: regions[Math.floor(Math.random() * regions.length)]._id,
     },
   ];
 
@@ -113,7 +110,10 @@ const seedProducts = async () => {
 };
 
 const seedDatabase = async () => {
-  await Promise.all([seedUsers(), seedRegions(), seedProducts()]);
+  await seedUsers();
+  const regions = await seedRegions();
+  await seedProducts(regions);
+  // db.close();
 };
 
 mongoose.connect("mongodb://localhost:27017/ecommerce", {

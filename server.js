@@ -33,14 +33,10 @@ mongoose
     console.log(err);
   });
 
-try {
-  // Passport middleware
-  app.use(passport.initialize());
+// Passport middleware
+app.use(passport.initialize());
 
-  require("./config/passport-config.js")(passport);
-} catch (error) {
-  console.log("🚀 ~ file: server.js:42 ~ error", error);
-}
+require("./config/passport-config.js")(passport);
 
 app.use(Cors());
 

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 const productSchema = new mongoose.Schema(
   {
@@ -22,6 +23,11 @@ const productSchema = new mongoose.Schema(
     },
     stock: {
       type: Number,
+      required: true,
+    },
+    region: {
+      type: Schema.Types.ObjectId,
+      ref: "Region",
       required: true,
     },
   },
