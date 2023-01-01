@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const orderServicesHelpers = require("../helpers/services/orderServices.helpers");
 
 const orderSchema = new mongoose.Schema(
   {
@@ -54,9 +53,50 @@ const orderSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+//
+// Fake payment gateway
+const makePayment = (order_id) => {
+  // Simulate a payment being made
+  console.log(`Simulating payment for order ${order_id}...`);
+  const paymentSuccess = Math.random() >= 0.5; // Randomly decide if the payment is successful
+  return paymentSuccess;
+};
+
+// Task that is triggered 1 minute after an Order is created
+const updateOrderState = async (order_id) => {
+  try {
+    console.log(`Updating state of order ${order_id}...`);
+    // Find the Order document
+    console.log(
+      "🚀 ~ file: orderServices.helpers.js:80 ~ updateOrderState ~ Order",
+      Order
+    );
+
+    const order = await Order.findById(order_id);
+    if (!order) {
+      throw new Error(`Order with id ${order_id} not found.`);
+    }
+    // Make a payment
+    const paymentSuccess = makePayment(order_id);
+    if (paymentSuccess) {
+      // Update the state of the Order to paid
+      order.state = "paid";
+      order.paid_at = Date.now();
+      console.log(`Order ${order_id} was successfully paid.`);
+    } else {
+      // Update the state of the Order to unpaid
+      order.state = "unpaid";
+      console.log(`Payment for order ${order_id} failed.`);
+    }
+    // Save the updated Order document
+    await order.save();
+  } catch (err) {
+    console.error(err);
+  }
+};
 // Middleware that triggers the updateOrderState task 1 minute after an Order is created
 orderSchema.post("save", function (doc, next) {
-  setTimeout(() => orderServicesHelpers.updateOrderState(doc._id), 60000); // 1 minute in milliseconds
+  setTimeout(() => updateOrderState(doc._id), 60000); // 1 minute in milliseconds
   next();
 });
 
