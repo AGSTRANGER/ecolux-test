@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const orderServicesHelpers = require("../helpers/services/orderServices.helpers");
 
 const orderSchema = new mongoose.Schema(
   {
@@ -52,6 +53,12 @@ const orderSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+// Middleware that triggers the updateOrderState task 1 minute after an Order is created
+orderSchema.post("save", function (doc, next) {
+  setTimeout(() => orderServicesHelpers.updateOrderState(doc._id), 60000); // 1 minute in milliseconds
+  next();
+});
 
 const Order = mongoose.model("Order", orderSchema);
 module.exports = Order;
