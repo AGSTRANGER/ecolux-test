@@ -30,9 +30,8 @@ const createOrder = async (user_id, shipping_address, items) => {
   }
   return result;
 };
-const getOrdersOfUser = () => {};
 
-const updateAnOrder = async (
+const updateOrder = async (
   order_id,
   user_id,
   shipping_address,
@@ -63,7 +62,7 @@ const updateAnOrder = async (
           previously_ordered_item.product.toString() == item_to_update._id
       );
       console.log(
-        "🚀 ~ file: orderServices.js:56 ~ updateAnOrder ~ index",
+        "🚀 ~ file: orderServices.js:56 ~ updateOrder ~ index",
         index
       );
       const is_this_old_item = index > -1;
@@ -92,9 +91,24 @@ const updateAnOrder = async (
 
   return result;
 };
-const deleteAnOrder = () => {};
+
+const getOrder = async (order_id) => {
+  let result = { order: null };
+  order = await Order.findById(order_id);
+  if (!order) {
+    throw new Error("Order does not exist");
+  } else {
+    result.order = order;
+    return result;
+  }
+};
+
+const deleteOrder = async (order_id) => {};
+
+const getOrdersOfUser = async (user_id) => {};
 
 exports.createOrder = createOrder;
+exports.updateOrder = updateOrder;
+exports.getOrder = getOrder;
+exports.deleteOrder = deleteOrder;
 exports.getOrdersOfUser = getOrdersOfUser;
-exports.updateAnOrder = updateAnOrder;
-exports.deleteAnOrder = deleteAnOrder;

@@ -40,16 +40,19 @@ router.get(
     session: false,
   }),
   async (req, res) => {
-    try {
-      const order = await Order.findById(req.params.id);
-      if (!order) {
-        res.status(404).send();
-      } else {
-        res.send(order);
-      }
-    } catch (error) {
-      res.status(500).send(error);
-    }
+    const order_id = req.params.id;
+    orderServices
+      .getOrder(order_id)
+      .then((result) => {
+        res.status(200).json({
+          message: "Order was found.",
+          result,
+        });
+      })
+      .catch((error) => {
+        console.log("🚀 ~ file: orders.js:24 ~ error", error);
+        res.status(500).send("Order wasn't found");
+      });
   }
 );
 
@@ -69,7 +72,7 @@ router.patch(
     console.log("🚀 ~ file: orders.js:86 ~ user_id", user_id);
     const { shipping_address, items } = req.body;
     orderServices
-      .updateAnOrder(order_id, user_id, shipping_address, items)
+      .updateOrder(order_id, user_id, shipping_address, items)
       .then((result) => {
         res.status(200).json({
           message: "Order update was successful",
