@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+
 import {
   Form,
   FormGroup,
@@ -9,15 +11,27 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import { signUp } from "../actions/api";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Implement sign-up logic here
+    if (password !== passwordConfirmation) {
+      // Display an error message if the passwords don't match
+      return;
+    }
+    // Construct the new user object
+    const newUser = {
+      email,
+      password,
+    };
+    // Send a request to the backend API to create a new user
+    signUp(newUser, dispatch);
   };
 
   return (
