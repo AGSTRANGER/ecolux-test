@@ -7,6 +7,7 @@ const initialState = {
     data: null,
     error: null,
   },
+  current_user: null,
 };
 
 export default function (state = initialState, action) {
@@ -43,6 +44,12 @@ export default function (state = initialState, action) {
           error: action.payload,
         },
       };
+    case "SET_CURRENT_USER":
+      return {
+        ...state,
+        current_user: action.payload,
+      };
+
     default:
       return state;
   }
