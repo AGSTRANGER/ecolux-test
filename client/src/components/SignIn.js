@@ -11,24 +11,23 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import { signUp } from "../actions/api";
+import { signIn } from "../actions/api";
 
-const SignUp = () => {
-  const signUpState = useSelector((state) => state.auth.sign_up);
+const SignIn = () => {
+  const signInState = useSelector((state) => state.auth.sign_in);
 
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newUser = {
-      name,
+
+    const sign_in_info = {
       email,
       password,
     };
-    signUp(newUser, dispatch);
+    signIn(sign_in_info, dispatch);
   };
 
   return (
@@ -36,17 +35,6 @@ const SignUp = () => {
       <Row className="justify-content-center">
         <Col md="6">
           <Form onSubmit={handleSubmit}>
-            <FormGroup>
-              <Label for="name">Name</Label>
-              <Input
-                type="name"
-                name="name"
-                id="name"
-                placeholder="Enter your name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </FormGroup>
             <FormGroup>
               <Label for="email">Email</Label>
               <Input
@@ -69,21 +57,13 @@ const SignUp = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </FormGroup>
-            <Button type="submit">Sign Up</Button>
+
+            <Button type="submit">Sign in</Button>
           </Form>
         </Col>
       </Row>
-      {!!signUpState?.data && (
-        <Row className="justify-content-center">
-          <Col md="6">
-            <div className="sign-up-success">
-              <p>Congratulations, your sign up was successful!</p>
-            </div>
-          </Col>
-        </Row>
-      )}
 
-      {!!signUpState?.error && (
+      {!!signInState?.error && (
         <Row className="justify-content-center">
           <Col md="6">
             <div className="sign-up-error">
@@ -96,4 +76,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignIn;

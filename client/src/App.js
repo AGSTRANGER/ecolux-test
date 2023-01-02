@@ -8,7 +8,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import rootReducer from "./reducers";
 
 import SignUp from "./components/SignUp";
-import Login from "./components/Login";
+import SignIn from "./components/SignIn";
 import Home from "./components/Home";
 import Regions from "./components/Regions";
 import Products from "./components/Products";
@@ -24,7 +24,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/signin" element={<SignIn />} />
           <Route path="/regions" element={<Regions />} />
           <Route path="/products" element={<Products />} />
           <Route path="/orders" element={<Orders />} />
