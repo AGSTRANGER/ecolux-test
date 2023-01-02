@@ -67,10 +67,6 @@ const updateOrderState = async (order_id) => {
   try {
     console.log(`Updating state of order ${order_id}...`);
     // Find the Order document
-    console.log(
-      "🚀 ~ file: orderServices.helpers.js:80 ~ updateOrderState ~ Order",
-      Order
-    );
 
     const order = await Order.findById(order_id);
     if (!order) {

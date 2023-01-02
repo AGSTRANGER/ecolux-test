@@ -8,15 +8,12 @@ const userServices = require("../../services/userServices");
 
 router.post("/", (req, res) => {
   const { name, email, password } = req.body;
-  console.log("🚀 ~ file: users.js:11 ~ router.post ~ req.body", req.body);
   userServices
     .signupUser(name, email, password)
     .then((result) => {
-      console.log("🚀 ~ file: users.js:15 ~ .then ~ result", result);
       res.status(200).json({ message: "Sign-up was successful" });
     })
     .catch((error) => {
-      console.log("🚀 ~ file: users.js:19 ~ router.post ~ error", error);
       res.status(500).send("Sign-up was unsuccessful");
     });
 });
@@ -27,16 +24,13 @@ router.post("/", (req, res) => {
 
 router.post("/signin", (req, res) => {
   const { email, password } = req.body;
-  console.log("🚀 ~ file: users.js:30 ~ router.post ~ req.body", req.body);
   userServices
     .signinUser(email, password)
     .then((result) => {
-      console.log("🚀 ~ file: users.js:34 ~ .then ~ result", result);
       const { sign_in_token } = result;
       res.status(200).json({ token: sign_in_token });
     })
     .catch((error) => {
-      console.log("🚀 ~ file: users.js:39 ~ router.post ~ error", error);
       res.status(500).send("Sign-in was unsuccessful");
     });
 });

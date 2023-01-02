@@ -113,8 +113,6 @@ const deleteOrder = async (order_id) => {
 
 const getOrdersOfUser = async (user_id) => {};
 
-console.log("🚀 ~ file: orderServices.js:2 ~ Order", Order);
-
 exports.createOrder = createOrder;
 exports.getOrder = getOrder;
 exports.updateOrder = updateOrder;
