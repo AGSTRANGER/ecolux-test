@@ -4,19 +4,14 @@ export const signUp = (newUser, dispatch) => {
   return axios
     .post("/api/users", newUser)
     .then((res) => {
-      if (res.data.success) {
-        dispatch({
-          type: "USER_SIGNUP_SUCCESS",
-          payload: res.data.data,
-        });
-      } else {
-        dispatch({
-          type: "USER_SIGNUP_ERROR",
-          payload: res.data.error,
-        });
-      }
+      console.log("🚀 ~ file: authActions.js:7 ~ .then ~ res", res);
+      dispatch({
+        type: "USER_SIGNUP_SUCCESS",
+        payload: res.data,
+      });
     })
     .catch((error) => {
+      console.log("🚀 ~ file: authActions.js:14 ~ signUp ~ error", error);
       dispatch({
         type: "USER_SIGNUP_ERROR",
         payload: error,

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
   Form,
@@ -14,6 +14,9 @@ import {
 import { signUp } from "../actions/api";
 
 const SignUp = () => {
+  const signUpState = useSelector((state) => state.auth.sign_up);
+
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
@@ -27,6 +30,7 @@ const SignUp = () => {
     }
     // Construct the new user object
     const newUser = {
+      name,
       email,
       password,
     };
@@ -39,6 +43,17 @@ const SignUp = () => {
       <Row className="justify-content-center">
         <Col md="6">
           <Form onSubmit={handleSubmit}>
+            <FormGroup>
+              <Label for="name">Name</Label>
+              <Input
+                type="name"
+                name="name"
+                id="name"
+                placeholder="Enter your name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </FormGroup>
             <FormGroup>
               <Label for="email">Email</Label>
               <Input
@@ -76,6 +91,25 @@ const SignUp = () => {
           </Form>
         </Col>
       </Row>
+      {!!signUpState?.data && (
+        <Row className="justify-content-center">
+          <Col md="6">
+            <div className="sign-up-success">
+              <p>Congratulations, your sign up was successful!</p>
+            </div>
+          </Col>
+        </Row>
+      )}
+
+      {!!signUpState?.error && (
+        <Row className="justify-content-center">
+          <Col md="6">
+            <div className="sign-up-error">
+              <p>Ooops, an error has occured :/</p>
+            </div>
+          </Col>
+        </Row>
+      )}
     </Container>
   );
 };

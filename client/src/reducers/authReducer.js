@@ -1,6 +1,8 @@
 const initialState = {
-  currentUser: null,
-  signUpError: null,
+  sign_up: {
+    data: null,
+    error: null,
+  },
 };
 
 export default function (state = initialState, action) {
@@ -8,14 +10,18 @@ export default function (state = initialState, action) {
     case "USER_SIGNUP_SUCCESS":
       return {
         ...state,
-        currentUser: action.payload,
-        signUpError: null,
+        sign_up: {
+          data: action.payload,
+          error: null,
+        },
       };
     case "USER_SIGNUP_ERROR":
       return {
         ...state,
-        currentUser: null,
-        signUpError: action.payload,
+        sign_up: {
+          data: null,
+          error: action.payload,
+        },
       };
     default:
       return state;

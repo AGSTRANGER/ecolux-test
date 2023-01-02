@@ -18,7 +18,7 @@ List of users API endpoints:
 
 List of users API endpoints:
 
-1. The POST /api/users/signup endpoint is for signing up a new user. It receives an email and password in the request body, and then creates a new user with these fields using the signupUser service. If the sign up was successful, it returns a status of 200 and a message. If it was unsuccessful, it returns a status of 500 and a message.
+1. The POST /api/users endpoint is for signing up a new user. It receives an email and password in the request body, and then creates a new user with these fields using the signupUser service. If the sign up was successful, it returns a status of 200 and a message. If it was unsuccessful, it returns a status of 500 and a message.
 
 The signupUser service creates a new user with the provided email and password and saves it to the database. It uses the genSalt and genHash helpers from the userServicesHelpers module to generate a salt and hash the password before saving it.
 
@@ -150,3 +150,12 @@ The will return:
 }
 }
 }
+
+---
+
+Note 6:
+When installing the frontend modules, you may get an error because
+react-redux is not yet compatible with the latest version of React
+
+So when you install react-redux, use this flag
+--legacy-peer-deps

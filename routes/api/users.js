@@ -2,18 +2,21 @@ const express = require("express");
 const router = express.Router();
 const userServices = require("../../services/userServices");
 
-// @route  POST api/users/signup
+// @route  POST api/users/
 // @desc   Sign up user
 // @access Public
 
-router.post("/signup", (req, res) => {
+router.post("/", (req, res) => {
   const { name, email, password } = req.body;
+  console.log("🚀 ~ file: users.js:11 ~ router.post ~ req.body", req.body);
   userServices
     .signupUser(name, email, password)
     .then((result) => {
+      console.log("🚀 ~ file: users.js:15 ~ .then ~ result", result);
       res.status(200).json({ message: "Sign-up was successful" });
     })
     .catch((error) => {
+      console.log("🚀 ~ file: users.js:19 ~ router.post ~ error", error);
       res.status(500).send("Sign-up was unsuccessful");
     });
 });
