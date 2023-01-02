@@ -21,9 +21,9 @@ const SignUp = () => {
   };
 
   return (
-    <Container className="mx-auto">
-      <Row style={{ borderStyle: "dotted" }}>
-        <Col sm="6" md="3">
+    <Container className="mx-auto mt-5">
+      <Row className="justify-content-center">
+        <Col md="6">
           <Form onSubmit={handleSubmit}>
             <FormGroup>
               <Label for="email">Email</Label>
