@@ -1,14 +1,19 @@
 import { Navbar, Nav, NavItem, NavLink } from "reactstrap";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { signOut } from "../actions/api";
 
 export default function AppHeader() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   console.log(
-    "🚀 ~ file: AppHeader.js:7 ~ AppHeader ~ isAuthenticated",
+    "🚀 ~ file: AppHeader.js:8 ~ AppHeader ~ isAuthenticated",
     isAuthenticated
   );
+  const dispatch = useDispatch();
 
+  const onSignOutNavButtonClicked = () => {
+    signOut(dispatch);
+  };
   return (
     <Navbar color="light" light expand="md">
       <Nav className="mr-auto" navbar>
@@ -47,7 +52,14 @@ export default function AppHeader() {
             </NavLink>
           </NavItem>
         )}
-        {isAuthenticated && <NavItem>Sign-out</NavItem>}
+        {isAuthenticated && (
+          <NavItem
+            className="cursor-pointer"
+            onClick={onSignOutNavButtonClicked}
+          >
+            Sign-out
+          </NavItem>
+        )}
       </Nav>
     </Navbar>
   );
