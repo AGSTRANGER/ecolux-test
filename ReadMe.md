@@ -159,3 +159,9 @@ react-redux is not yet compatible with the latest version of React
 
 So when you install react-redux, use this flag
 --legacy-peer-deps
+
+---
+
+Note 7:
+To run the frontend, use this command:
+cd client && npm start

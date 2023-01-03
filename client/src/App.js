@@ -25,10 +25,9 @@ function App() {
         <div>
           <AppHeader />
           <Routes>
-            <Route exact path="/" component={Home} />
-            <Route path="/regions" component={Regions} />
-            <Route path="/products" component={Products} />
-            <Route path="/orders" component={Orders} />
+            <Route exact path="/" element={<Home />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/orders" element={<Orders />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
           </Routes>
