@@ -1,3 +1,5 @@
+import isEmpty from "../utils/isEmpty";
+
 const initialState = {
   sign_up: {
     data: null,
@@ -8,6 +10,7 @@ const initialState = {
     error: null,
   },
   current_user: null,
+  isAuthenticated: false,
 };
 
 export default function (state = initialState, action) {
@@ -48,6 +51,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         current_user: action.payload,
+        // Because, if the payload which is the decoded token is filled that means that the user is authenticated
+        // If it's an empty object then we shouldn't be authenticated
+        // This way when we want to log-out  we can simply pass an empty object in the payload :)
+        // And the user will go back to being an empty object
+        isAuthenticated: !isEmpty(action.payload),
       };
 
     default:
