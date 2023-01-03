@@ -40,3 +40,14 @@
 .cursor-pointer {
   cursor: pointer;
 }
+
+#project-name {
+  font-size: 48px;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+}
