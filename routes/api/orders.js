@@ -22,10 +22,8 @@ router.post(
       .createOrder(user_id, shipping_address, items)
       .then((result) => {
         console.log("🚀 ~ file: orders.js:24 ~ .then ~ result", result);
-        res.status(200).json({
-          message: "Order creation was successful",
-          result,
-        });
+        const { created_order } = result;
+        res.status(200).json(created_order);
       })
       .catch((error) => {
         console.log("🚀 ~ file: orders.js:28 ~ error", error);

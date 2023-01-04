@@ -22,7 +22,8 @@ const createOrder = async (user_id, shipping_address, items) => {
       items: available_ordered_items_info,
     };
     const order = new Order(order_info);
-    result.created_order = await order.save();
+    const created_order = await order.save();
+    result.created_order = await Order.populate(created_order, "items.product");
   } else {
     throw new Error(
       "There is no longer stock available for one or more of the ordered items or the product does not exist."

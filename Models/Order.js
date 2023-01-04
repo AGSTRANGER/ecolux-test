@@ -26,7 +26,7 @@ const orderSchema = new mongoose.Schema(
         _id: false,
         product: {
           type: Schema.Types.ObjectId,
-          ref: "Products",
+          ref: "Product",
         },
         // As I mentioned for the order_total field
         // The price of the product may change in the future

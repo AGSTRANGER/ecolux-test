@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Container, Row, Col, ListGroup, ListGroupItem } from "reactstrap";
 
 const Orders = ({ orders }) => {
+  console.log("🚀 ~ file: Orders.js:6 ~ Orders ~ orders", orders);
   return (
     <Container>
       <Row>
@@ -11,7 +12,7 @@ const Orders = ({ orders }) => {
             <ListGroup key={index}>
               <ListGroupItem>
                 <h3>Order {index + 1}</h3>
-                {order.cart.items.map((item) => (
+                {order.items.map((item) => (
                   <div key={item._id}>
                     <p>{item.title}</p>
                     <p>{item.quantity}</p>

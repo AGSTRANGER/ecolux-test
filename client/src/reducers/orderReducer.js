@@ -108,10 +108,10 @@ export default function (state = initialState, action) {
           ...state,
           order_creation: {
             loading: false,
-            data: action.payload,
+            data: action.payload.data,
             error: null,
           },
-          orders: [...state.orders, action.payload],
+          orders: [...state.orders, action.payload.data],
           carts: [
             ...state.carts.slice(0, cartIndex),
             ...state.carts.slice(cartIndex + 1),
