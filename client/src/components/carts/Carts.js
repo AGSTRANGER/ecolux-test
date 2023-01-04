@@ -21,7 +21,7 @@ import {
 const Carts = ({ carts, dispatch }) => {
   console.log("🚀 ~ file: Carts.js:22 ~ Carts ~ dispatch", dispatch);
   const [modal, setModal] = useState(false);
-  const [shippingAddress, setShippingAddress] = useState("");
+  const [shipping_address, setShippingAddress] = useState("");
 
   const toggle = () => setModal(!modal);
 
@@ -36,7 +36,7 @@ const Carts = ({ carts, dispatch }) => {
   const submitOrder = (cart) => {
     const order_data = {
       items: cart,
-      shippingAddress,
+      shipping_address,
     };
     console.log("🚀 ~ file: Carts.js:43 ~ submitOrder ~ dispatch", dispatch);
 
@@ -66,13 +66,13 @@ const Carts = ({ carts, dispatch }) => {
                   <ModalBody>
                     <Form>
                       <FormGroup>
-                        <Label for="shippingAddress">Address</Label>
+                        <Label for="shipping_address">Address</Label>
                         <Input
                           type="text"
-                          name="shippingAddress"
-                          id="shippingAddress"
+                          name="shipping_address"
+                          id="shipping_address"
                           placeholder="Enter shipping address"
-                          value={shippingAddress}
+                          value={shipping_address}
                           onChange={handleAddressChange}
                         />
                       </FormGroup>
