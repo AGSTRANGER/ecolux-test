@@ -53,7 +53,10 @@ The signinUser service tries to find a user with the provided email, and then ve
 Make sure you have nodemon installed because the start script uses it:
 "start": "nodemon server.js"
 Otherwise, you can just use
+
+```javascript
 node server.js
+```
 
 ---
 
