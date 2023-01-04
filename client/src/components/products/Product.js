@@ -1,13 +1,16 @@
 import React from "react";
-import { Card, CardBody, CardTitle, CardText, Button } from "reactstrap";
+import { connect } from "react-redux";
 
-const Product = ({ product }) => {
-  const { image_url, title, description } = product;
-  console.log("🚀 ~ ========================================");
-  console.log("🚀 ~ file: Product.js:6 ~ Product ~ description", description);
-  console.log("🚀 ~ file: Product.js:6 ~ Product ~ title", title);
-  console.log("🚀 ~ file: Product.js:6 ~ Product ~ image_url", image_url);
-  console.log("🚀 ~ ========================================");
+import { Card, CardBody, CardTitle, CardText, Button } from "reactstrap";
+import { addToCart } from "../../actions/api";
+
+const Product = ({ product, dispatch }) => {
+  const { _id, image_url, title, description } = product;
+  console.log("🚀 ~ file: Product.js:9 ~ Product ~ _id", _id);
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(_id, title));
+  };
 
   return (
     <Card
@@ -18,28 +21,23 @@ const Product = ({ product }) => {
       }}
     >
       <img
-        src={product.image_url}
-        alt={product.title}
+        src={image_url}
+        alt={title}
         style={{
           height: "200px",
           width: "200px",
           objectFit: "cover",
         }}
       />
-      <CardBody
-        style={
-          {
-            // display: "flex",
-            // justifyContent: "center",
-          }
-        }
-      >
-        <CardTitle>{product.title}</CardTitle>
-        <CardText>{product.description}</CardText>
-        <Button color="primary">Add to Cart</Button>
+      <CardBody>
+        <CardTitle>{title}</CardTitle>
+        <CardText>{description}</CardText>
+        <Button color="primary" onClick={handleAddToCart}>
+          Add to Cart
+        </Button>
       </CardBody>
     </Card>
   );
 };
 
-export default Product;
+export default connect()(Product);

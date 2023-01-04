@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../actions/api";
 
 import Product from "./Product";
+import Cart from "./Cart";
 
 const Products = () => {
   const products = useSelector((state) => state.product.products);
@@ -19,6 +20,7 @@ const Products = () => {
         products.data.map((product) => (
           <Product key={product._id} product={product} />
         ))}
+      <Cart />
     </div>
   );
 };
