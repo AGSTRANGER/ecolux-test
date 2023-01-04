@@ -165,3 +165,9 @@ So when you install react-redux, use this flag
 Note 7:
 To run the frontend, use this command:
 cd client && npm start
+
+---
+
+Screenshots:
+
+![Sign-up page](/test-images/Screenshot 1 - Sign up successful.png)
