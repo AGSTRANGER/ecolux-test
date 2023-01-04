@@ -1,3 +1,24 @@
+Screenshots:
+
+The user can sign-up using the sign-up page:
+![Sign-up page](/test-images/signup.png)
+
+He can then sign-in using the sign-in page:
+![Sign-up page](/test-images/signin.png)
+
+He can create a cart from the available products:
+![Sign-up page](/test-images/create_cart.png)
+
+![Sign-up page](/test-images/created_carts.png)
+
+He can create an order from existing carts:
+![Sign-up page](/test-images/creating_order.png)
+
+He can see the orders he created here:
+![Sign-up page](/test-images/created_orders.png)
+
+---
+
 List of orders API endpoints:
 
 1. The POST /api/orders endpoint is for creating a new order. It authenticates the request using the normal-request-authentication-strategy, and then creates an order with the user's ID, shipping address, and items from the request body.
@@ -167,17 +188,3 @@ To run the frontend, use this command:
 cd client && npm start
 
 ---
-
-Screenshots:
-
-![Sign-up page](/test-images/signup.png)
-
-![Sign-up page](/test-images/signin.png)
-
-![Sign-up page](/test-images/create_cart.png)
-
-![Sign-up page](/test-images/created_carts.png)
-
-![Sign-up page](/test-images/creating_order.png)
-
-![Sign-up page](/test-images/created_orders.png)
