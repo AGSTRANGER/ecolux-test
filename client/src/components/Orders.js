@@ -1,9 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import {
-  Container,
-  Row,
-  Col,
   Card,
   CardBody,
   CardTitle,
@@ -12,14 +9,20 @@ import {
   ListGroupItem,
 } from "reactstrap";
 
-const Orders = ({ orders }) => {
+import { getOrders } from "../actions/api";
+
+const Orders = ({ orders, dispatch }) => {
+  useEffect(() => {
+    getOrders(dispatch);
+  }, []);
+
   console.log("🚀 ~ file: Orders.js:16 ~ Orders ~ orders", orders);
   return (
     <div>
-      {orders.map((order) => (
+      {orders.data.map((order, i) => (
         <Card key={order._id}>
           <CardBody>
-            <CardTitle>Order Information</CardTitle>
+            <CardTitle>Order {i + 1} Information</CardTitle>
             <CardText>Shipping Address: {order.shipping_address}</CardText>
             <CardText>Order Total: {order.order_total}</CardText>
             <CardTitle>Items</CardTitle>

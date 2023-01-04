@@ -112,10 +112,17 @@ const deleteOrder = async (order_id) => {
   }
 };
 
-const getOrdersOfUser = async (user_id) => {};
+const getUserOrders = async (user_id) => {
+  let response = {
+    orders: null,
+  };
+  const search_option = { user: user_id };
+  response.orders = await Order.find(search_option).populate("items.product");
+  return response;
+};
 
 exports.createOrder = createOrder;
 exports.getOrder = getOrder;
 exports.updateOrder = updateOrder;
 exports.deleteOrder = deleteOrder;
-exports.getOrdersOfUser = getOrdersOfUser;
+exports.getUserOrders = getUserOrders;

@@ -9,7 +9,11 @@ const initialState = {
     data: null,
     error: null,
   },
-  orders: [],
+  orders: {
+    loading: null,
+    data: [],
+    error: null,
+  },
 };
 
 export default function (state = initialState, action) {
@@ -111,7 +115,11 @@ export default function (state = initialState, action) {
             data: action.payload.data,
             error: null,
           },
-          orders: [...state.orders, action.payload.data],
+          orders: {
+            loading: null,
+            data: [...state.orders.data, action.payload.data],
+            error: null,
+          },
           carts: [
             ...state.carts.slice(0, cartIndex),
             ...state.carts.slice(cartIndex + 1),
@@ -126,6 +134,35 @@ export default function (state = initialState, action) {
         order_creation: {
           loading: false,
           data: null,
+          error: action.payload,
+        },
+      };
+    case "GET_ORDERS_LOADING":
+      return {
+        ...state,
+        orders: {
+          loading: true,
+          data: [],
+          error: null,
+        },
+      };
+
+    case "GET_ORDERS_SUCCESS":
+      return {
+        ...state,
+        orders: {
+          loading: false,
+          data: action.payload,
+          error: null,
+        },
+      };
+
+    case "GET_ORDERS_ERROR":
+      return {
+        ...state,
+        orders: {
+          loading: false,
+          data: [],
           error: action.payload,
         },
       };

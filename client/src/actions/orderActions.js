@@ -42,3 +42,27 @@ export const createOrder = (orderData, dispatch) => {
       });
     });
 };
+
+export const getOrders = (dispatch) => {
+  console.log(
+    "🚀 ~ file: orderActions.js:23 ~ createOrder ~ dispatch",
+    dispatch
+  );
+  dispatch({
+    type: "GET_ORDERS_LOADING",
+  });
+  axios
+    .get("/api/orders")
+    .then((response) => {
+      dispatch({
+        type: "GET_ORDERS_SUCCESS",
+        payload: response.data,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: "GET_ORDERS_ERROR",
+        error,
+      });
+    });
+};

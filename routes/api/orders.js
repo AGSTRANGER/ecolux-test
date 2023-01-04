@@ -110,4 +110,30 @@ router.delete(
   }
 );
 
+// @route  Get api/orders/
+// @desc   Get user orders
+// @access Private
+
+router.get(
+  "/",
+  passport.authenticate("normal-request-authentication-strategy", {
+    session: false,
+  }),
+  async (req, res) => {
+    const user_id = req.user._id;
+    console.log("🚀 ~ file: orders.js:124 ~ user_id", user_id);
+    orderServices
+      .getUserOrders(user_id)
+      .then((response) => {
+        console.log("🚀 ~ file: orders.js:127 ~ .then ~ response", response);
+        const { orders } = response;
+        res.status(200).json(orders);
+      })
+      .catch((error) => {
+        console.log("🚀 ~ file: orders.js:132 ~ error", error);
+        res.status(500).send("We couldn't retrieve user orders.");
+      });
+  }
+);
+
 module.exports = router;
