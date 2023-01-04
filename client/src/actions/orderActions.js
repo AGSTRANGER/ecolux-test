@@ -12,3 +12,7 @@ export const removeFromCart = (product_id) => ({
     product_id,
   },
 });
+
+export const createOrder = (cart) => ({
+  type: "CREATE_ORDER",
+});

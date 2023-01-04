@@ -1,5 +1,6 @@
 const initialState = {
   cart: [],
+  orders: [],
 };
 
 export default function (state = initialState, action) {
@@ -53,6 +54,14 @@ export default function (state = initialState, action) {
       } else {
         return state;
       }
+
+    case "CREATE_ORDER":
+      // Create the order and clear the cart
+      return {
+        ...state,
+        orders: [...state.orders, { cart: state.cart }],
+        cart: [],
+      };
     default:
       return state;
   }
