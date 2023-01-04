@@ -10,13 +10,30 @@ const Product = ({ product }) => {
   console.log("🚀 ~ ========================================");
 
   return (
-    <Card style={{ width: "18rem" }}>
+    <Card
+      className="w-25 d-inline-block mr-3 mb-3"
+      style={{
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
       <img
         src={product.image_url}
         alt={product.title}
-        style={{ height: "200px" }}
+        style={{
+          height: "200px",
+          width: "200px",
+          objectFit: "cover",
+        }}
       />
-      <CardBody>
+      <CardBody
+        style={
+          {
+            // display: "flex",
+            // justifyContent: "center",
+          }
+        }
+      >
         <CardTitle>{product.title}</CardTitle>
         <CardText>{product.description}</CardText>
         <Button color="primary">Add to Cart</Button>
