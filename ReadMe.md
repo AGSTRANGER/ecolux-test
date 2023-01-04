@@ -168,7 +168,16 @@ cd client && npm start
 
 ---
 
-/test-images/Screenshot 1 - Sign up successful.png
 Screenshots:
 
 ![Sign-up page](/test-images/signup.png)
+
+![Sign-up page](/test-images/signin.png)
+
+![Sign-up page](/test-images/create_cart.png)
+
+![Sign-up page](/test-images/created_carts.png)
+
+![Sign-up page](/test-images/creating_order.png)
+
+![Sign-up page](/test-images/created_orders.png)
