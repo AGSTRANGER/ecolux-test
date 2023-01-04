@@ -25,6 +25,12 @@ const seedUsers = async () => {
       password: "password3",
       type: "customer_admin",
     },
+    {
+      name: "Ahmed",
+      email: "hannibaletunisien@gmail.com",
+      password: "password3",
+      type: "customer",
+    },
   ];
   // Hashing passwords
   for (let i = 0; i < users.length; i++) {
@@ -72,7 +78,7 @@ const seedProducts = async (regions) => {
     {
       title: "T-Shirt",
       description: "A stylish t-shirt",
-      image_url: "https://example.com/tshirt.jpg",
+      image_url: "https://source.unsplash.com/WWesmHEgXDs",
       price: 20,
       sku: "TSHIRT001",
       stock: 100,
@@ -81,7 +87,8 @@ const seedProducts = async (regions) => {
     {
       title: "Pants",
       description: "A pair of comfortable pants",
-      image_url: "https://example.com/pants.jpg",
+      image_url: "https://source.unsplash.com/BciCcl8tjVU ",
+
       price: 30,
       sku: "PANTS001",
       stock: 50,
@@ -90,7 +97,8 @@ const seedProducts = async (regions) => {
     {
       title: "Mug",
       description: "A ceramic mug",
-      image_url: "https://example.com/mug.jpg",
+      image_url: "https://source.unsplash.com/n42ogaQn32o",
+
       price: 10,
       sku: "MUG001",
       stock: 75,

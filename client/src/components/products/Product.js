@@ -11,7 +11,6 @@ const Product = ({ product }) => {
 
   return (
     <Card style={{ width: "18rem" }}>
-      hihi
       <img
         src={product.image_url}
         alt={product.title}
