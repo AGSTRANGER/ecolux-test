@@ -1,4 +1,4 @@
-import { Navbar, Nav, NavItem, NavLink } from "reactstrap";
+import { Navbar, Nav, NavItem, NavLink, NavbarBrand } from "reactstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signOut } from "../actions/api";
@@ -16,6 +16,8 @@ export default function AppHeader() {
   };
   return (
     <Navbar color="light" light expand="md">
+      <NavbarBrand href="/">Eqolux</NavbarBrand>
+
       <Nav className="mr-auto" navbar>
         <NavItem>
           <NavLink tag={Link} to="/">
