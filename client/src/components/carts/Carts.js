@@ -19,7 +19,6 @@ import {
 } from "reactstrap";
 
 const Carts = ({ carts, dispatch }) => {
-  console.log("🚀 ~ file: Carts.js:22 ~ Carts ~ dispatch", dispatch);
   const [modal, setModal] = useState(false);
   const [shipping_address, setShippingAddress] = useState("");
 
@@ -39,7 +38,6 @@ const Carts = ({ carts, dispatch }) => {
       items: cart.items,
       shipping_address,
     };
-    console.log("🚀 ~ file: Carts.js:43 ~ submitOrder ~ dispatch", dispatch);
 
     createOrder(order_data, dispatch);
     toggle();

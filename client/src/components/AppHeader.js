@@ -5,10 +5,7 @@ import { signOut } from "../actions/api";
 
 export default function AppHeader() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  console.log(
-    "🚀 ~ file: AppHeader.js:8 ~ AppHeader ~ isAuthenticated",
-    isAuthenticated
-  );
+
   const dispatch = useDispatch();
 
   const onSignOutNavButtonClicked = () => {

@@ -11,7 +11,6 @@ import {
 import { removeFromCart, createCart } from "../../actions/api";
 
 const Cart = ({ cart, dispatch }) => {
-  console.log("🚀 ~ file: Cart.js:14 ~ Cart ~ dispatch", dispatch);
   const handleRemoveFromCart = (productId) => {
     dispatch(removeFromCart(productId));
   };

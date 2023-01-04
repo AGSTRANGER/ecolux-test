@@ -104,7 +104,6 @@ export default function (state = initialState, action) {
       const cartIndex = state.carts.findIndex(
         (cart) => cart._id === action.payload.cart_id
       );
-      console.log("🚀 ~ file: orderReducer.js:103 ~ cartIndex", cartIndex);
 
       // Remove the cart from the list of carts
       if (cartIndex >= 0) {

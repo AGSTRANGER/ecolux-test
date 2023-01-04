@@ -17,7 +17,6 @@ const Orders = ({ orders, dispatch }) => {
     getOrders(dispatch);
   }, []);
 
-  console.log("🚀 ~ file: Orders.js:16 ~ Orders ~ orders", orders);
   return (
     <Container>
       <br />

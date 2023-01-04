@@ -15,18 +15,13 @@ router.post(
   async (req, res) => {
     const user_id = req.user._id;
     const { shipping_address, items } = req.body;
-    console.log("🚀 ~ file: orders.js:18 ~ shipping_address", shipping_address);
-    console.log("🚀 ~ file: orders.js:18 ~ items", items);
-    console.log("🚀 ~ file: orders.js:18 ~ req.body", req.body);
     orderServices
       .createOrder(user_id, shipping_address, items)
       .then((result) => {
-        console.log("🚀 ~ file: orders.js:24 ~ .then ~ result", result);
         const { created_order } = result;
         res.status(200).json(created_order);
       })
       .catch((error) => {
-        console.log("🚀 ~ file: orders.js:28 ~ error", error);
         res.status(500).send("Order creation was unsuccessful");
       });
   }
@@ -121,16 +116,13 @@ router.get(
   }),
   async (req, res) => {
     const user_id = req.user._id;
-    console.log("🚀 ~ file: orders.js:124 ~ user_id", user_id);
     orderServices
       .getUserOrders(user_id)
       .then((response) => {
-        console.log("🚀 ~ file: orders.js:127 ~ .then ~ response", response);
         const { orders } = response;
         res.status(200).json(orders);
       })
       .catch((error) => {
-        console.log("🚀 ~ file: orders.js:132 ~ error", error);
         res.status(500).send("We couldn't retrieve user orders.");
       });
   }

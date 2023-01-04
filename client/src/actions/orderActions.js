@@ -20,10 +20,6 @@ export const createCart = () => ({
 });
 
 export const createOrder = (orderData, dispatch) => {
-  console.log(
-    "🚀 ~ file: orderActions.js:23 ~ createOrder ~ dispatch",
-    dispatch
-  );
   dispatch({
     type: "CREATE_ORDER_LOADING",
   });
@@ -44,10 +40,6 @@ export const createOrder = (orderData, dispatch) => {
 };
 
 export const getOrders = (dispatch) => {
-  console.log(
-    "🚀 ~ file: orderActions.js:23 ~ createOrder ~ dispatch",
-    dispatch
-  );
   dispatch({
     type: "GET_ORDERS_LOADING",
   });

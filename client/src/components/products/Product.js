@@ -6,7 +6,6 @@ import { addToCart } from "../../actions/api";
 
 const Product = ({ product, dispatch }) => {
   const { _id, image_url, title, description } = product;
-  console.log("🚀 ~ file: Product.js:9 ~ Product ~ _id", _id);
 
   const handleAddToCart = () => {
     dispatch(addToCart(_id, title));

@@ -7,7 +7,6 @@ import Cart from "../carts/Cart";
 
 const Products = () => {
   const products = useSelector((state) => state.product.products);
-  console.log("🚀 ~ file: Products.js:9 ~ Products ~ products", products);
 
   const dispatch = useDispatch();
 
