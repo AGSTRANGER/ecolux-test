@@ -15,6 +15,7 @@ router.post(
   async (req, res) => {
     const user_id = req.user._id;
     const { shipping_address, items } = req.body;
+    console.log("🚀 ~ file: orders.js:18 ~ req.body", req.body);
     orderServices
       .createOrder(user_id, shipping_address, items)
       .then((result) => {

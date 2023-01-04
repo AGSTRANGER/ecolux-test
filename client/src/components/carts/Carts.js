@@ -1,8 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
-import { Container, Row, Col, ListGroup, ListGroupItem } from "reactstrap";
+import { createOrder } from "../../actions/api";
+import {
+  Container,
+  Row,
+  Col,
+  ListGroup,
+  ListGroupItem,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+} from "reactstrap";
 
-const Carts = ({ carts }) => {
+const Carts = ({ carts, dispatch }) => {
+  console.log("🚀 ~ file: Carts.js:22 ~ Carts ~ dispatch", dispatch);
+  const [modal, setModal] = useState(false);
+  const [shippingAddress, setShippingAddress] = useState("");
+
+  const toggle = () => setModal(!modal);
+
+  const handleAddressChange = (event) => {
+    setShippingAddress(event.target.value);
+  };
+
+  const showModal = () => {
+    toggle();
+  };
+
+  const submitOrder = (cart) => {
+    const order_data = {
+      items: cart,
+      shippingAddress,
+    };
+    console.log("🚀 ~ file: Carts.js:43 ~ submitOrder ~ dispatch", dispatch);
+
+    createOrder(order_data, dispatch);
+    toggle();
+  };
+
   return (
     <Container>
       <Row>
@@ -17,6 +58,35 @@ const Carts = ({ carts }) => {
                     <p>{item.quantity}</p>
                   </div>
                 ))}
+                <Button onClick={() => showModal(cart)}>Create Order</Button>
+                <Modal isOpen={modal} toggle={toggle}>
+                  <ModalHeader toggle={toggle}>
+                    Enter Shipping Address
+                  </ModalHeader>
+                  <ModalBody>
+                    <Form>
+                      <FormGroup>
+                        <Label for="shippingAddress">Address</Label>
+                        <Input
+                          type="text"
+                          name="shippingAddress"
+                          id="shippingAddress"
+                          placeholder="Enter shipping address"
+                          value={shippingAddress}
+                          onChange={handleAddressChange}
+                        />
+                      </FormGroup>
+                    </Form>
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button color="primary" onClick={() => submitOrder(cart)}>
+                      Submit
+                    </Button>{" "}
+                    <Button color="secondary" onClick={toggle}>
+                      Cancel
+                    </Button>
+                  </ModalFooter>
+                </Modal>
               </ListGroupItem>
             </ListGroup>
           ))}

@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const addToCart = (product_id, title) => ({
   type: "ADD_TO_CART",
   payload: {
@@ -13,6 +15,30 @@ export const removeFromCart = (product_id) => ({
   },
 });
 
-export const createCart = (cart) => ({
+export const createCart = () => ({
   type: "CREATE_CART",
 });
+
+export const createOrder = (orderData, dispatch) => {
+  console.log(
+    "🚀 ~ file: orderActions.js:23 ~ createOrder ~ dispatch",
+    dispatch
+  );
+  dispatch({
+    type: "CREATE_ORDER_LOADING",
+  });
+  axios
+    .post("/api/orders", orderData)
+    .then((response) => {
+      dispatch({
+        type: "CREATE_ORDER_SUCCESS",
+        payload: response.data,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: "CREATE_ORDER_ERROR",
+        error,
+      });
+    });
+};

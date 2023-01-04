@@ -1,6 +1,11 @@
 const initialState = {
   cart: [],
   carts: [],
+  order_creation: {
+    loading: null,
+    data: null,
+    error: null,
+  },
   orders: [],
 };
 
@@ -63,6 +68,38 @@ export default function (state = initialState, action) {
         carts: [...state.carts, { cart: state.cart }],
         cart: [],
       };
+
+    case "CREATE_ORDER_LOADING":
+      return {
+        ...state,
+        order_creation: {
+          loading: true,
+          data: null,
+          error: null,
+        },
+      };
+
+    case "CREATE_ORDER_SUCCESS":
+      return {
+        ...state,
+        order_creation: {
+          loading: false,
+          data: action.payload,
+          error: null,
+        },
+        orders: [...state.orders, action.payload],
+      };
+
+    case "CREATE_ORDER_ERROR":
+      return {
+        ...state,
+        order_creation: {
+          loading: false,
+          data: null,
+          error: action.payload,
+        },
+      };
+
     default:
       return state;
   }
