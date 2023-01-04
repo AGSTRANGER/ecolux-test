@@ -168,6 +168,7 @@ cd client && npm start
 
 ---
 
+/test-images/Screenshot 1 - Sign up successful.png
 Screenshots:
 
-![Sign-up page](/test-images/Screenshot 1 - Sign up successful.png)
+![Sign-up page](/test-images/signup.png)
