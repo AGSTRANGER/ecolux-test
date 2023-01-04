@@ -32,7 +32,7 @@ export const createOrder = (orderData, dispatch) => {
     .then((response) => {
       dispatch({
         type: "CREATE_ORDER_SUCCESS",
-        payload: response.data,
+        payload: { cart_id: orderData.cart_id, data: response.data },
       });
     })
     .catch((error) => {

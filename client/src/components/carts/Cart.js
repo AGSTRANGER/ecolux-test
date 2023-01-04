@@ -26,7 +26,7 @@ const Cart = ({ cart, dispatch }) => {
         <Row>
           <Col>
             <ListGroup>
-              {cart.map((item) => (
+              {cart.items.map((item) => (
                 <ListGroupItem key={item._id}>
                   <Row>
                     <Col xs="8">{item.title}</Col>
@@ -45,7 +45,7 @@ const Cart = ({ cart, dispatch }) => {
             </ListGroup>
           </Col>
         </Row>
-        {cart.length > 0 && (
+        {cart.items.length > 0 && (
           <Row>
             <Col>
               <Button color="primary" onClick={handleCreateCart}>

@@ -35,7 +35,8 @@ const Carts = ({ carts, dispatch }) => {
 
   const submitOrder = (cart) => {
     const order_data = {
-      items: cart,
+      cart_id: cart._id,
+      items: cart.items,
       shipping_address,
     };
     console.log("🚀 ~ file: Carts.js:43 ~ submitOrder ~ dispatch", dispatch);
@@ -52,7 +53,7 @@ const Carts = ({ carts, dispatch }) => {
             <ListGroup key={index}>
               <ListGroupItem>
                 <h3>Cart {index + 1}</h3>
-                {cart.cart.map((item) => (
+                {cart.items.map((item) => (
                   <div key={item._id}>
                     <p>{item.title}</p>
                     <p>{item.quantity}</p>

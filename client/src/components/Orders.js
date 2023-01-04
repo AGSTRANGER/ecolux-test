@@ -11,7 +11,7 @@ const Orders = ({ orders }) => {
             <ListGroup key={index}>
               <ListGroupItem>
                 <h3>Order {index + 1}</h3>
-                {order.cart.map((item) => (
+                {order.cart.items.map((item) => (
                   <div key={item._id}>
                     <p>{item.title}</p>
                     <p>{item.quantity}</p>
