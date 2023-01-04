@@ -8,15 +8,15 @@ import {
   ListGroupItem,
   Button,
 } from "reactstrap";
-import { removeFromCart, createOrder } from "../../actions/api";
+import { removeFromCart, createCart } from "../../actions/api";
 
 const Cart = ({ cart, dispatch }) => {
   const handleRemoveFromCart = (productId) => {
     dispatch(removeFromCart(productId));
   };
 
-  const handleCreateOrder = () => {
-    dispatch(createOrder(cart));
+  const handleCreateCart = () => {
+    dispatch(createCart(cart));
   };
 
   return (
@@ -47,8 +47,8 @@ const Cart = ({ cart, dispatch }) => {
         {cart.length > 0 && (
           <Row>
             <Col>
-              <Button color="primary" onClick={handleCreateOrder}>
-                Send order
+              <Button color="primary" onClick={handleCreateCart}>
+                Create cart
               </Button>
             </Col>
           </Row>

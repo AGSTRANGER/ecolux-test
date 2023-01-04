@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../actions/api";
 
 import Product from "./Product";
-import Cart from "./Cart";
+import Cart from "../carts/Cart";
 
 const Products = () => {
   const products = useSelector((state) => state.product.products);

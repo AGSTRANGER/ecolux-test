@@ -33,6 +33,13 @@ export default function AppHeader() {
         )}
         {isAuthenticated && (
           <NavItem>
+            <NavLink tag={Link} to="/carts">
+              Carts
+            </NavLink>
+          </NavItem>
+        )}
+        {isAuthenticated && (
+          <NavItem>
             <NavLink tag={Link} to="/orders">
               Orders
             </NavLink>

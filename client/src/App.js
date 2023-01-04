@@ -12,6 +12,7 @@ import SignIn from "./components/SignIn";
 import Home from "./components/Home";
 import Products from "./components/products/Products";
 import Orders from "./components/Orders";
+import Carts from "./components/carts/Carts";
 import AppHeader from "./components/AppHeader";
 import AppFooter from "./components/AppFooter";
 
@@ -26,6 +27,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/carts" element={<Carts />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />

@@ -13,6 +13,6 @@ export const removeFromCart = (product_id) => ({
   },
 });
 
-export const createOrder = (cart) => ({
-  type: "CREATE_ORDER",
+export const createCart = (cart) => ({
+  type: "CREATE_CART",
 });
