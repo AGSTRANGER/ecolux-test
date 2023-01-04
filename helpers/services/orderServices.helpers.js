@@ -27,7 +27,7 @@ const checkIfItemsStocksAreStillAvailable = async (ordered_items) => {
           quantity: ordered_item.quantity,
         },
       ];
-      result.order_total += available_item.price;
+      result.order_total += available_item.price * quantity;
     } else {
       result.are_items_stocks_still_available = false;
     }
