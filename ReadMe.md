@@ -1,3 +1,5 @@
+This projet was built to apply for a fullstack developer position. It was built in few days.
+
 Screenshots:
 
 The user can sign-up using the sign-up page:
